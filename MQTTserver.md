@@ -28,6 +28,19 @@ curl -L https://github.com/docker/compose/releases/download/1.23.0-rc3/docker-co
 chmod +x /usr/local/bin/docker-compose
 ```
 
+## 設定mosquitto.conf
+
+```
+persistence true
+persistence_location /mosquitto/data/
+log_dest file /mosquitto/log/mosquitto.log
+
+allow_anonymous true
+
+listener 1883
+protocol mqtt
+```
+
 ## 設定docker-compoer.yaml檔案
 
 ```
