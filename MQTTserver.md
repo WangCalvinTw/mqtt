@@ -34,13 +34,14 @@ chmod +x /usr/local/bin/docker-compose
 version: "3"
 services:
   mosquitto:
-    volumes:                                   //對應的資料夾
-      -/mosquitto:/mosquitto
-      -/mosquitto/data:/mosquitto/data
-      -/mosquitto/log://mosquitto/log
-    ports:
-      - 1884:1883                              //外部設定1884,避免與外部的1883衝突
     image: eclipse-mosquitto                   //安裝的image
+    container_name: compose_mqtt               //容器的名稱
+    volumes:                                   //對應的資料夾
+      - /mosquitto/config:/mosquitto/config
+    ports:
+      - 1883:1883                              //與外部的port對應 可+IP上去 ex: 127.0.0.1:1883:1883
+      - 9001:9001
+
     
 ```
 
@@ -52,3 +53,4 @@ services:
 docker-compose up -d                          //-d為背景執行
 
 ```
+
