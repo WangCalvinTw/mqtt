@@ -51,6 +51,7 @@ services:
     container_name: compose_mqtt                                  //容器的名稱
     volumes:                                                      //對應的資料夾
       - /mosquitto:/mosquitto
+      - /mosquitto/config:/mosquitto/config
       - /mosquitto/data:/mosquitto/data
       - /mosquitto/log:/mosquitto/log
     ports:
