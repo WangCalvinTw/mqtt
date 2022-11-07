@@ -1,0 +1,25 @@
+version: "3"
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: compose_mqtt
+    volumes:
+      - ./mosquitto:/mosquitto
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    ports:
+      - 1883:1883
+      - 9001:9001
+
+    redis:
+    image: redis:latest
+    container_name: compose_redis
+    ports:
+      - 6379:6379
+
+    nestjs/cli:
+    image: nestjs_node
+    container_name: compose_nestjs
+    ports:
+      - 3000:3000
