@@ -41,6 +41,29 @@ listener 1883
 protocol mqtt
 ```
 
+## 設定dockerfile檔案
+
+在nestjs資料夾下建立dockerfil
+
+```
+FROM node:16
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+
+CMD [ "node", "server.js" ]
+    
+```
+
+在執行 docker build -t nestjs_node .
+
 ## 設定docker-compoer.yaml檔案
 
 ```
@@ -58,6 +81,17 @@ services:
       - 1883:1883                                                 //與外部的port對應 可+IP上去 ex: 127.0.0.1:1883:1883
       - 9001:9001
 
+    redis:
+    image: redis:latest
+    container_name: compose_redis
+    ports:
+      - 6379:6379
+
+    nestjs/cli:
+    image: nestjs_node
+    container_name: compose_nestjs
+    ports:
+      - 3000:3000
     
 ```
 
